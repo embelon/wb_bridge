@@ -73,8 +73,8 @@ async def test_wb_bridge_2way(dut):
     wbm_bus = WishboneMaster(dut, "", dut.wb_clk_i, width=32, timeout=10, signals_dict=wbm_signals_dict)
 
     busa_base_adr = 0x3000_0000
-    busb_base_adr = 0x30ff_fc00
-    busb_end_adr = 0x30ff_ffff
+    busb_base_adr = 0x300f_f800
+    busb_end_adr = 0x300f_ffff
 
     wbsa_size = busb_base_adr - busa_base_adr
     wbsa_bus = WishboneRAM(dut, dut.wb_clk_i, wbsa_signals_dict, wbsa_size, busa_base_adr)
@@ -89,5 +89,8 @@ async def test_wb_bridge_2way(dut):
     await reset(dut)
 
     await wbm_write(wbm_bus, busa_base_adr, 0xdeadbeef)
+    await wbm_write(wbm_bus, busb_base_adr-4, 0xfabfabfa)
 
     await wbm_write(wbm_bus, busb_base_adr, 0xc00ffeee)
+    await wbm_write(wbm_bus, busb_end_adr-4, 0xfa11fa11)
+
