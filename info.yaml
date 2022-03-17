@@ -13,5 +13,6 @@ source:
 
 final:
   directory: "final"
-  gds_filename: "wb_bridge_2way.gds"
-  lef_filename: "wb_bridge_2way.lef"
+  gds_filename: "gds/wb_bridge_2way.gds"
+  lvs_filename: "verilog/gl/wb_bridge_2way.v"
+  lef_filename: "lef/wb_bridge_2way.lef"
